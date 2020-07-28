@@ -7,7 +7,7 @@ args = sys.argv[1:]
 num_args = len(args)
 
 thesecolors=['black','grey','blue','red','green','purple']
-
+xtickmarks=[]
 for i in range(num_args):
 	disp=np.genfromtxt(args[i])
 	thisx=(disp[:,0])
@@ -26,7 +26,13 @@ for xc in xposition:
 		plt.axvline(x=xc,color='k',linestyle='-')
 	else:
 		plt.axvline(x=xc, color='grey',linestyle='--')
+xticks_length = len(thisy)//100 + 1
+for z in range(xticks_length):
+	xtickmarks.append(z*100)
+
 plt.xlabel('Residue Number')
 plt.ylabel(r'$\delta$q($\AA$)')
+print(xtickmarks)
+plt.xticks(xtickmarks, rotation=45)
 
 plt.show()
