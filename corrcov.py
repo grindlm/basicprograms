@@ -47,7 +47,14 @@ if length_of_complex==1248:
 	domaincolor = ['gold', 'forestgreen', 'blue', 'gold', 'forestgreen', 'blue']
 	plt.yticks([48,148,248,348,448,548,648,748,848,948,1048,1148,1248],[1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=12)
 	plt.xticks([0,100,200,300,400,500,600,700,800,900,1000,1100,1200],np.arange(0,1201,step=100),rotation=45, fontsize=12)
-elif length_of_complex==1853:
+elif length_of_complex==1853 and "dnakatend" not in args[0]:
+	fntsz = 14
+	dom = [227,489,624,(624+227),(624+489),1248,(1248+390),(1248+510)]
+	domainname = [r'NTD$_{(GA)}$', r'MD$_{(GA)}$', r'CTD$_{(GA)}$', r'NTD$_{(GB)}$', r'MD$_{(GB)}$', r'CTD$_{(GB)}$', r'NBD$_{(K)}$', r'SBD$\beta_{(K)}$', r'SBD$\alpha_{(K)}$']
+	domaincolor = ['gold', 'forestgreen', 'blue', 'gold', 'forestgreen', 'blue', 'grey', 'red', 'salmon']
+	plt.xticks(np.arange(0,1853,step=100),np.arange(0,1853,step=100),rotation=45, fontsize=12)
+	plt.yticks([53,153,253,353,453,553,653,753,853,953,1053,1153,1253,1353,1453,1553,1653,1753,1853],[1800,1700,1600,1500,1400,1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=12)
+elif length_of_complex==1853 and "dnakatend" in args[0]:
 	fntsz = 14
 	dom = [227,489,624,(624+227),(624+489),1248,(1248+390),(1248+510)]
 	domainname = [r'NTD$_{(GA)}$', r'MD$_{(GA)}$', r'CTD$_{(GA)}$', r'NTD$_{(GB)}$', r'MD$_{(GB)}$', r'CTD$_{(GB)}$', r'NBD$_{(K)}$', r'SBD$\beta_{(K)}$', r'SBD$\alpha_{(K)}$']
@@ -62,14 +69,14 @@ elif length_of_complex==2458:
 	plt.xticks(np.arange(0,2458,step=100),np.arange(0,2458,step=100),rotation=45, fontsize=12)
 	plt.yticks([58,158,258,358,458,558,658,758,858,958,1058,1158,1258,1358,1458,1558,1658,1758,1858, 1958,2058,2158,2258,2358,2458],[2400,2300,2200,2100,2000,1900,1800,1700,1600,1500,1400,1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=12)
 elif length_of_complex==605:
-	fntsz = 20
+	fntsz = 16
 	dom = [390,510]
 	domainname = [r'NBD$_{(K)}$', r'SBD$\beta_{(K)}$', r'SBD$\alpha_{(K)}$']
 	domaincolor = ['grey', 'red', 'salmon']
 	plt.xticks(np.arange(0,601,step=100),np.arange(0,601,step=100),rotation=45, fontsize=12)
 	plt.yticks([5,105,205,305,405,505,605],[600,500,400,300,200,100,0], fontsize=12)
 elif length_of_complex==604:
-	fntsz = 20
+	fntsz = 16
 	dom = [390,510]
 	domainname = [r'NBD$_{(K)}$', r'SBD$\beta_{(K)}$', r'SBD$\alpha_{(K)}$']
 	domaincolor = ['grey', 'red', 'salmon']
@@ -95,14 +102,17 @@ else:
 
 dominv=[]
 if len(dom)>0:
-	ax.text(length_of_complex,-5,f"{length_of_complex - dom[-3]}",ha='center', fontsize=8)
+	if len(dom) > 3:
+		ax.text(length_of_complex,(-0.002*length_of_complex),f"{length_of_complex - dom[-3]}",ha='center', fontsize=8)
+	else:
+		ax.text(length_of_complex,(-0.002*length_of_complex),f"{length_of_complex}",ha='center', fontsize=8)
 	for i in range(len(dom)):
 		if i == 0:
-			ax.text(dom[i]/2,-80, "{}".format(domainname[i]),ha='center',fontsize=fntsz, color=f"{domaincolor[i]}")
+			ax.text(dom[i]/2,(-0.03*length_of_complex), "{}".format(domainname[i]),ha='center',fontsize=fntsz, color=f"{domaincolor[i]}")
 			print("first domain --> {} {} {}".format(dom[i], domainname[i], domaincolor[i]))
 		elif dom[i] == dom[-1]:
-			ax.text((dom[i]+dom[i-1])/2, -80, "{}".format(domainname[i]),ha='center',fontsize=fntsz, color=f"{domaincolor[i]}")
-			ax.text((dom[i]+length_of_complex)/2, -80, "{}".format(domainname[i+1]), fontsize=fntsz, color=f"{domaincolor[i+1]}")
+			ax.text((dom[i]+dom[i-1])/2, (-0.03*length_of_complex), "{}".format(domainname[i]),ha='center',fontsize=fntsz, color=f"{domaincolor[i]}")
+			ax.text((dom[i]+length_of_complex)/2, (-0.03*length_of_complex), "{}".format(domainname[i+1]), fontsize=fntsz, color=f"{domaincolor[i+1]}")
 			print("This is the {} domain --> {} {} {}".format(i, dom[i], domainname[i], domaincolor[i]))
 			print("{} domain --> {} {} {}".format(i+1, dom[i], domainname[i+1], domaincolor[i+1]))
 		else:
@@ -110,20 +120,23 @@ if len(dom)>0:
 				hac = 'left'
 			else:
 				hac = 'center'
-			ax.text((dom[i]+dom[i-1])/2, -80, "{}".format(domainname[i]),ha=hac,fontsize=fntsz, color=f"{domaincolor[i]}")
+			ax.text((dom[i]+dom[i-1])/2, (-0.03*length_of_complex), "{}".format(domainname[i]),ha=hac,fontsize=fntsz, color=f"{domaincolor[i]}")
 			print("{} domain --> {} {} {}".format(i, dom[i], domainname[i], domaincolor[i]))
 		if dom[i] < 624:
-			ax.text(dom[i],(-5),f"{dom[i]}",fontsize=8, ha='center')
+			ax.text(dom[i],(-0.002*length_of_complex),f"{dom[i]}",fontsize=8, ha='center')
 		elif 624 <= dom[i] < 1248:
-			ax.text(dom[i],(-5),f"{dom[i] - 624}",fontsize=8, ha='center')
+			ax.text(dom[i], (-0.002*length_of_complex),f"{dom[i] - 624}",fontsize=8, ha='center')
 		elif 1248 <= dom[i] < 1853:
-			ax.text(dom[i],(-5),f"{dom[i] - 1248}",fontsize=8, ha='center')
+			ax.text(dom[i], (-0.002*length_of_complex),f"{dom[i] - 1248}",fontsize=8, ha='center')
 		elif 1853 <= dom[i] < 2458:
-			ax.text(dom[i],(-5),f"{dom[i] - 1853}",fontsize=8, ha='center')
+			ax.text(dom[i], (-0.002*length_of_complex),f"{dom[i] - 1853}",fontsize=8, ha='center')
 		dominv.append(abs(dom[i]-length_of_complex))
 		dominv.sort()
 	ax.vlines(dom, 0, length_of_complex, linewidth=3, color='k')
 	ax.hlines(dominv, 0, length_of_complex, linewidth=3,color='k')
+
+plt.xlabel('Residue Number')
+plt.ylabel('Residue Number')
 
 print(dom, dominv, length_of_complex)
 

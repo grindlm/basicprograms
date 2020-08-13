@@ -2,7 +2,7 @@
 
 rm -f plot_mathematica*
 
-for m in 9 15 19 40 42 ; do
+for m in 15 19 40 ; do
 {
   awk -v mode=$m BEGIN'{
 	ifile1="ev-sorted-xyz_dnak-htpg-mode"mode".dnakatend.dat"
