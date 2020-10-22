@@ -5,9 +5,7 @@ import seaborn as sns
 import pandas as pd
 import numpy as np
 import sys 
-import math
 from matplotlib.colors import ListedColormap, LinearSegmentedColormap
-from matplotlib import cm
 
 args = sys.argv[1:]
 num_args = len(args)
