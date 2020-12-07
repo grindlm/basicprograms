@@ -45,13 +45,20 @@ if length_of_complex==1248:
 	domaincolor = ['gold', 'forestgreen', 'blue', 'gold', 'forestgreen', 'blue']
 	plt.yticks([48,148,248,348,448,548,648,748,848,948,1048,1148,1248],[1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=12)
 	plt.xticks([0,100,200,300,400,500,600,700,800,900,1000,1100,1200],np.arange(0,1201,step=100),rotation=45, fontsize=12)
-if length_of_complex==1357:
+elif length_of_complex==1357:
 	fntsz = 16
 	dom = [390,510,605,(605+110),(605+254),(376+605),(376+605+110),(376+605+254)]
 	domainname = [r'NBD$_{(K)}$', r'SBD$\beta_{(K)}$', r'SBD$\alpha_{(K)}$', r'JD$_{(JA)}$', r'CTDI$_{(JA)}$', r'CTDII$_{(JA)}$ ', r'JD$_{(JB)}$', r'CTDI$_{(JB)}$', r'CTDII$_{(JB)}$']
 	domaincolor = ['grey','red','salmon','cyan','violet','purple','cyan','violet','purple']
 	plt.xticks([0,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300],np.arange(0,1301,step=100),rotation=45, fontsize=12)
 	plt.yticks([57,157,257,357,457,557,657,757,857,957,1057,1157,1257,1357],[1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=12)
+elif length_of_complex==923:
+	fntsz = 16
+	dom = [390,510,605,605+159]
+	domainname = [r'NBD$_{(K)}$', r'SBD$\beta_{(K)}$', r'SBD$\alpha_{(K)}$', r'GrpE$_{(A)}$', r'GrpE$_{(B)}$']
+	domaincolor = ['grey','red','salmon','orange','orange']
+	plt.xticks([0,100,200,300,400,500,600,700,800,900],np.arange(0,901,step=100),rotation=45, fontsize=12)
+	plt.yticks([23,123,223,323,423,523,623,723,823,923],[900,800,700,600,500,400,300,200,100,0], fontsize=12)
 elif length_of_complex==1853 and "dnakatend" not in args[0]:
 	fntsz = 14
 	dom = [227,489,624,(624+227),(624+489),1248,(1248+390),(1248+510)]
@@ -97,9 +104,6 @@ elif length_of_complex==1357:
 	dom = [390,510,605,981]
 	plt.xticks(np.arange(0,1357,step=100),np.arange(0,1357,step=100),rotation=45, fontsize=12)
 	plt.yticks([57,157,257,357,457,557,657,757,857,957,1057,1157,1257,1357],[1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=12)
-elif length_of_complex==923:
-	fntsz = 20
-	dom = []
 else:
 	fntsz = 20
 	dom = []
@@ -108,7 +112,7 @@ else:
 dominv=[]
 if len(dom)>0:
 	if len(dom) > 3:
-		ax.text(length_of_complex,(-0.002*length_of_complex),f"{length_of_complex - dom[-3]}",ha='center', fontsize=8)
+		ax.text(length_of_complex,(-0.002*length_of_complex),f"{length_of_complex - dom[-2]}",ha='center', fontsize=8)
 	else:
 		ax.text(length_of_complex,(-0.002*length_of_complex),f"{length_of_complex}",ha='center', fontsize=8)
 	for i in range(len(dom)):
