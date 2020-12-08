@@ -6,7 +6,8 @@ import numpy as np
 args = sys.argv[1:]
 num_args = len(args)
 
-thesecolors=['black','grey','blue','red','green','purple']
+fig, ax = plt.subplots(figsize=(12,8))
+thesecolors=['black','red','blue','green','purple','purple']
 xtickmarks=[]
 for i in range(num_args):
 	disp=np.genfromtxt(args[i])
@@ -32,7 +33,7 @@ for z in range(xticks_length):
 
 plt.xlabel('Residue Number')
 plt.ylabel(r'$\delta$q($\AA$)')
-print(xtickmarks)
+
 plt.xticks(xtickmarks, rotation=45)
 
 plt.show()
