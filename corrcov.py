@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
-import sys 
+import sys
+import math
 from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 
 args = sys.argv[1:]
@@ -43,6 +44,10 @@ if length_of_complex==1248:
 	dom = [227,489,624,(624+227),(624+489)]
 	domainname = [r'NTD$_{(GA)}$', r'MD$_{(GA)}$', r'CTD$_{(GA)}$', r'NTD$_{(GB)}$', r'MD$_{(GB)}$', r'CTD$_{(GB)}$']
 	domaincolor = ['gold', 'forestgreen', 'blue', 'gold', 'forestgreen', 'blue']
+<<<<<<< HEAD
+	plt.yticks([48,148,248,348,448,548,648,748,848,948,1048,1148,1248],[1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=16)
+	plt.xticks([0,100,200,300,400,500,600,700,800,900,1000,1100,1200],np.arange(0,1201,step=100),rotation=45, fontsize=16)
+=======
 	plt.yticks([48,148,248,348,448,548,648,748,848,948,1048,1148,1248],[1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=12)
 	plt.xticks([0,100,200,300,400,500,600,700,800,900,1000,1100,1200],np.arange(0,1201,step=100),rotation=45, fontsize=12)
 elif length_of_complex==1357:
@@ -59,41 +64,42 @@ elif length_of_complex==923:
 	domaincolor = ['grey','red','salmon','orange','orange']
 	plt.xticks([0,100,200,300,400,500,600,700,800,900],np.arange(0,901,step=100),rotation=45, fontsize=12)
 	plt.yticks([23,123,223,323,423,523,623,723,823,923],[900,800,700,600,500,400,300,200,100,0], fontsize=12)
+>>>>>>> 3d6c850c01ed788b5d3345180af04b309e6b8fcf
 elif length_of_complex==1853 and "dnakatend" not in args[0]:
 	fntsz = 14
 	dom = [227,489,624,(624+227),(624+489),1248,(1248+390),(1248+510)]
 	domainname = [r'NTD$_{(GA)}$', r'MD$_{(GA)}$', r'CTD$_{(GA)}$', r'NTD$_{(GB)}$', r'MD$_{(GB)}$', r'CTD$_{(GB)}$', r'NBD$_{(K)}$', r'SBD$\beta_{(K)}$', r'SBD$\alpha_{(K)}$']
 	domaincolor = ['gold', 'forestgreen', 'blue', 'gold', 'forestgreen', 'blue', 'grey', 'red', 'salmon']
-	plt.xticks(np.arange(0,1853,step=100),np.arange(0,1853,step=100),rotation=45, fontsize=12)
-	plt.yticks([53,153,253,353,453,553,653,753,853,953,1053,1153,1253,1353,1453,1553,1653,1753,1853],[1800,1700,1600,1500,1400,1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=12)
+	plt.xticks(np.arange(0,1853,step=100),np.arange(0,1853,step=100),rotation=45, fontsize=16)
+	plt.yticks([53,153,253,353,453,553,653,753,853,953,1053,1153,1253,1353,1453,1553,1653,1753,1853],[1800,1700,1600,1500,1400,1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=16)
 elif length_of_complex==1853 and "dnakatend" in args[0]:
 	fntsz = 14
 	dom = [227,489,624,(624+227),(624+489),1248,(1248+390),(1248+510)]
 	domainname = [r'NTD$_{(GA)}$', r'MD$_{(GA)}$', r'CTD$_{(GA)}$', r'NTD$_{(GB)}$', r'MD$_{(GB)}$', r'CTD$_{(GB)}$', r'NBD$_{(K)}$', r'SBD$\beta_{(K)}$', r'SBD$\alpha_{(K)}$']
 	domaincolor = ['gold', 'forestgreen', 'blue', 'gold', 'forestgreen', 'blue', 'grey', 'red', 'salmon']
-	plt.xticks(np.arange(0,1853,step=100),np.arange(0,1853,step=100),rotation=45, fontsize=12)
-	plt.yticks([53,153,253,353,453,553,653,753,853,953,1053,1153,1253,1353,1453,1553,1653,1753,1853],[1800,1700,1600,1500,1400,1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=12)
+	plt.xticks(np.arange(0,1853,step=100),np.arange(0,1853,step=100),rotation=45, fontsize=16)
+	plt.yticks([53,153,253,353,453,553,653,753,853,953,1053,1153,1253,1353,1453,1553,1653,1753,1853],[1800,1700,1600,1500,1400,1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=16)
 elif length_of_complex==2458:
 	fntsz = 9
 	dom = [227,489,624,(624+227),(624+489),1248,(1248+390),(1248+510),1853,(1853+390),(1853+510)]
 	domainname = [r'NTD$_{(GA)}$', r'MD$_{(GA)}$', r'CTD$_{(GA)}$', r'NTD$_{(GB)}$', r'MD$_{(GB)}$', r'CTD$_{(GB)}$', r'NBD$_{(KA)}$', r'SBD$\beta_{(KA)}$', r'SBD$\alpha_{(KA)}$', r'NBD$_{(KB)}$', r'SBD$\beta_{(KB)}$', r'SBD$\alpha_{(KB)}$']
 	domaincolor = ['gold', 'forestgreen', 'blue', 'gold', 'forestgreen', 'blue', 'grey', 'red', 'salmon', 'grey', 'red', 'salmon']
-	plt.xticks(np.arange(0,2458,step=100),np.arange(0,2458,step=100),rotation=45, fontsize=12)
-	plt.yticks([58,158,258,358,458,558,658,758,858,958,1058,1158,1258,1358,1458,1558,1658,1758,1858, 1958,2058,2158,2258,2358,2458],[2400,2300,2200,2100,2000,1900,1800,1700,1600,1500,1400,1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=12)
+	plt.xticks(np.arange(0,2458,step=100),np.arange(0,2458,step=100),rotation=45, fontsize=16)
+	plt.yticks([58,158,258,358,458,558,658,758,858,958,1058,1158,1258,1358,1458,1558,1658,1758,1858, 1958,2058,2158,2258,2358,2458],[2400,2300,2200,2100,2000,1900,1800,1700,1600,1500,1400,1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=16)
 elif length_of_complex==605:
 	fntsz = 16
 	dom = [390,510]
 	domainname = [r'NBD$_{(K)}$', r'SBD$\beta_{(K)}$', r'SBD$\alpha_{(K)}$']
 	domaincolor = ['grey', 'red', 'salmon']
-	plt.xticks(np.arange(0,601,step=100),np.arange(0,601,step=100),rotation=45, fontsize=12)
-	plt.yticks([5,105,205,305,405,505,605],[600,500,400,300,200,100,0], fontsize=12)
+	plt.xticks(np.arange(0,601,step=100),np.arange(0,601,step=100),rotation=45, fontsize=16)
+	plt.yticks([5,105,205,305,405,505,605],[600,500,400,300,200,100,0], fontsize=16)
 elif length_of_complex==604:
 	fntsz = 16
 	dom = [390,510]
 	domainname = [r'NBD$_{(K)}$', r'SBD$\beta_{(K)}$', r'SBD$\alpha_{(K)}$']
 	domaincolor = ['grey', 'red', 'salmon']
-	plt.xticks(np.arange(0,601,step=100),np.arange(0,601,step=100),rotation=45, fontsize=12)
-	plt.yticks([4,104,204,304,404,504,604],[600,500,400,300,200,100,0], fontsize=12)
+	plt.xticks(np.arange(0,601,step=100),np.arange(0,601,step=100),rotation=45, fontsize=16)
+	plt.yticks([4,104,204,304,404,504,604],[600,500,400,300,200,100,0], fontsize=16)
 elif length_of_complex==624:
 	fntsz = 20
 	dom = [227,489]
@@ -102,8 +108,16 @@ elif length_of_complex==624:
 elif length_of_complex==1357:
 	fntsz = 20
 	dom = [390,510,605,981]
+<<<<<<< HEAD
+	plt.xticks(np.arange(0,1357,step=100),np.arange(0,1357,step=100),rotation=45, fontsize=16)
+	plt.yticks([57,157,257,357,457,557,657,757,857,957,1057,1157,1257,1357],[1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=16)
+elif length_of_complex==923:
+	fntsz = 20
+	dom = []
+=======
 	plt.xticks(np.arange(0,1357,step=100),np.arange(0,1357,step=100),rotation=45, fontsize=12)
 	plt.yticks([57,157,257,357,457,557,657,757,857,957,1057,1157,1257,1357],[1300,1200,1100,1000,900,800,700,600,500,400,300,200,100,0], fontsize=12)
+>>>>>>> 3d6c850c01ed788b5d3345180af04b309e6b8fcf
 else:
 	fntsz = 20
 	dom = []
@@ -144,8 +158,8 @@ if len(dom)>0:
 	ax.vlines(dom, 0, length_of_complex, linewidth=3, color='k')
 	ax.hlines(dominv, 0, length_of_complex, linewidth=3,color='k')
 
-plt.xlabel('Residue Number')
-plt.ylabel('Residue Number')
+plt.xlabel('Residue Number', fontsize=15)
+plt.ylabel('Residue Number', fontsize=15)
 
 print(dom, dominv, length_of_complex)
 
