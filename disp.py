@@ -1,39 +1,49 @@
 #!/usr/bin/env python
-import sys
+from sys import argv
 import matplotlib.pyplot as plt
 import numpy as np
 
-args = sys.argv[1:]
-num_args = len(args)
+script, bfac_file  = argv
 
-fig, ax = plt.subplots(figsize=(12,8))
-thesecolors=['black','red','blue','green','purple','purple']
-xtickmarks=[]
-for i in range(num_args):
-	disp=np.genfromtxt(args[i])
-	thisx=(disp[:,0])
-	thisy=(disp[:,1])
-	if len(thisy)==1248:
-		xposition=[227,489,624,(624+227),(624+489)]
-	elif len(thisy)==1853:
-		xposition=[227,489,624,(624+227),(624+489),1248,(1248+389),(1248+510)]
-	elif len(thisy)==2458:
-		xposition=[227,489,624,(624+227),(624+489),1248,(1248+389),(1248+510),1853,(1853+389),(1853+510)]
-	else:
-		xposition=[]
-	plt.plot(thisx,thisy,color=thesecolors[i])
-for xc in xposition:
-	if xc==624 or xc==1248 or xc==1853:
-		plt.axvline(x=xc,color='k',linestyle='-')
-	else:
-		plt.axvline(x=xc, color='grey',linestyle='--')
-xticks_length = len(thisy)//100 + 1
-for z in range(xticks_length):
-	xtickmarks.append(z*100)
+bfacs = np.genfromtxt(bfac_file)
+number_of_modes = len(bfacs[0]-2)
 
-plt.xlabel('Residue Number')
-plt.ylabel(r'$\delta$q($\AA$)')
+print(f"This is the number of lines in bfacs {len(bfacs[:,1])}. it has {len(bfacs[0])-2} modes.")
 
-plt.xticks(xtickmarks, rotation=45)
+fig, ax = plt.subplots(figsize=(12,8), dpi=300)
+thesecolors=['black','blue','red','green','purple','purple']
+residues = bfacs[:,0]
 
-plt.show()
+htpg_length=1248
+dnak_length=605
+htpg_domains =np.array([227, 489, 624])
+dnak_domains = np.array([383, 510, 605])
+list_of_domains = []
+list_of_domain_names = []
+htpg_domain_names = ["NTD","MD","CTD"]
+dnak_domain_names = ["NBD",r"SBD\beta",r"SBD\alpha"]
+
+if len(bfacs[:,0])>=htpg_length:
+	list_of_domains.extend(htpg_domains)
+	list_of_domains.extend(htpg_domains+624)
+if len(bfacs[:,0])>=(htpg_length+dnak_length):
+	list_of_domains.extend((htpg_length+dnak_domains))
+if len(bfacs[:,0])>=(htpg_length+dnak_length+dnak_length):
+	list_of_domains.extend((htpg_length + dnak_length + dnak_domains))
+print(f"These are the domains {list_of_domains}")
+
+for i in range(len(bfacs[0])-1):
+	ax.plot(bfacs[:,0], bfacs[:,i+1], color=thesecolors[i], linewidth = 3)
+
+plt.xticks(rotation=45, fontsize=15, weight='bold')
+plt.yticks(fontsize=15, weight='bold')
+plt.xlabel('Residue Number', fontsize=25, weight='bold')
+plt.ylabel(r'$\delta$q($\AA$)', fontsize=25, weight='bold')
+
+xmin, xmax = ax.get_xlim()
+ymin, ymax = ax.get_ylim()
+
+plt.tight_layout()
+plt.ylim(0, ymax+0.01)
+ax.vlines(list_of_domains, 0, ymax+0.01, colors = 'k', linestyle='--')
+plt.savefig(f"thisisabfactest{bfac_file[:-4]}.png")
