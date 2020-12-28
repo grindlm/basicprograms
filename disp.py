@@ -11,7 +11,7 @@ number_of_modes = len(bfacs[0]-2)
 print(f"This is the number of lines in bfacs {len(bfacs[:,1])}. it has {len(bfacs[0])-2} modes.")
 
 fig, ax = plt.subplots(figsize=(12,8), dpi=300)
-thesecolors=['black','blue','red','green','purple','purple']
+thesecolors=['black','blue','red','green','purple']
 residues = bfacs[:,0]
 
 htpg_length=1248
@@ -20,20 +20,34 @@ htpg_domains =np.array([227, 489, 624])
 dnak_domains = np.array([383, 510, 605])
 list_of_domains = []
 list_of_domain_names = []
-htpg_domain_names = ["NTD","MD","CTD"]
-dnak_domain_names = ["NBD",r"SBD\beta",r"SBD\alpha"]
+list_of_domain_colors = []
+htpg_domain_names = [r"NTD$_{(GA)}$",r"MD$_{(GA)}$",r"CTD$_{(GA)}$",r"NTD$_{(GB)}$",r"MD$_{(GB)}$",r"CTD$_{(GB)}$"]
+dnak_domain_namesA = [r"NBD$_{(KA)}$",r"SBD$\beta_{(KA)}$",r"SBD$\alpha_{(KA)}$"]
+dnak_domain_namesB = [r"NBD$_{(KB)}$",r"SBD$\beta_{(KB)}$",r"SBD$\alpha_{(KB)}$"]
+htpg_domain_colors = ['yellow', 'green', 'blue', 'yellow', 'green', 'blue']
+dnak_domain_colors = ['grey', 'red', 'salmon']
 
 if len(bfacs[:,0])>=htpg_length:
 	list_of_domains.extend(htpg_domains)
 	list_of_domains.extend(htpg_domains+624)
+	list_of_domain_names.extend(htpg_domain_names)
+	list_of_domain_colors.extend(htpg_domain_colors)
 if len(bfacs[:,0])>=(htpg_length+dnak_length):
 	list_of_domains.extend((htpg_length+dnak_domains))
+	list_of_domain_names.extend(dnak_domain_namesA)
+	list_of_domain_colors.extend(dnak_domain_colors)
 if len(bfacs[:,0])>=(htpg_length+dnak_length+dnak_length):
 	list_of_domains.extend((htpg_length + dnak_length + dnak_domains))
+	list_of_domain_names.extend(dnak_domain_namesB)
+	list_of_domain_colors.extend(dnak_domain_colors)
 print(f"These are the domains {list_of_domains}")
+print(f"These are the domain names {list_of_domain_names}")
+print(f"These are the domain colors {list_of_domain_colors}")
 
 for i in range(len(bfacs[0])-1):
 	ax.plot(bfacs[:,0], bfacs[:,i+1], color=thesecolors[i], linewidth = 3)
+for j in range(len(list_of_domains)):
+	
 
 plt.xticks(rotation=45, fontsize=15, weight='bold')
 plt.yticks(fontsize=15, weight='bold')
