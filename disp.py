@@ -52,6 +52,8 @@ print(f"These are the modes {list_of_modes}")
 
 for i in range(len(bfacs[0])-1):
 	ax.plot(bfacs[:,0], bfacs[:,i+1], color=thesecolors[i], linewidth = 2, label = list_of_modes[i])
+legend_properties = {'fontsize' : 15,
+	'weight' : 'bold'}
 ax.legend()	
 all_domains = [0]
 all_domains.extend(list_of_domains)
