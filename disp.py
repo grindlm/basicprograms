@@ -16,20 +16,32 @@ residues = bfacs[:,0]
 
 htpg_length=1248
 dnak_length=605
+grpe_length=318
 htpg_domains =np.array([227, 489, 624])
 dnak_domains = np.array([383, 510, 605])
+grpe_domains = np.array([159, 318])
 list_of_domains = []
 list_of_domain_names = []
 list_of_domain_colors = []
 htpg_domain_names = [r"NTD$_{(GA)}$",r"MD$_{(GA)}$",r"CTD$_{(GA)}$",r"NTD$_{(GB)}$",r"MD$_{(GB)}$",r"CTD$_{(GB)}$"]
 dnak_domain_namesA = [r"NBD$_{(KA)}$",r"SBD$\beta_{(KA)}$",r"SBD$\alpha_{(KA)}$"]
 dnak_domain_namesB = [r"NBD$_{(KB)}$",r"SBD$\beta_{(KB)}$",r"SBD$\alpha_{(KB)}$"]
+dnak_domain_names = [r"NBD$_{(K)}$",r"SBD$\beta_{(K)}$",r"SBD$\alpha_{(K)}$"]
+grpe_domain_names = [r'GrpE$_{(A)}$', r'GrpE$_{(B)}$']
 htpg_domain_colors = ['gold', 'green', 'blue', 'gold', 'green', 'blue']
 dnak_domain_colors = ['grey', 'red', 'salmon']
+grpe_domain_colors = ['orange','chocolate']
 mode_color = []
 list_of_modes = []
-
-if len(bfacs[:,0])>=htpg_length:
+if len(bfacs[:,0])==(dnak_length+grpe_length):
+	list_of_domains.extend(dnak_domains)
+	list_of_domains.extend(grpe_domains+dnak_length)
+	list_of_domain_names.extend(dnak_domain_names)
+	list_of_domain_names.extend(grpe_domain_names)
+	list_of_domain_colors.extend(dnak_domain_colors)
+	list_of_domain_colors.extend(grpe_domain_colors)
+	list_of_modes = ["Sum of B Factors", "Mode 8", "Mode 14", "Mode 16"]
+elif len(bfacs[:,0])>=htpg_length:
 	list_of_domains.extend(htpg_domains)
 	list_of_domains.extend(htpg_domains+624)
 	list_of_domain_names.extend(htpg_domain_names)
