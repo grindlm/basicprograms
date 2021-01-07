@@ -46,7 +46,10 @@ elif len(bfacs[:,0])>=htpg_length:
 	list_of_domains.extend(htpg_domains+624)
 	list_of_domain_names.extend(htpg_domain_names)
 	list_of_domain_colors.extend(htpg_domain_colors)
-	list_of_modes = ["Sum of B factors","Mode 7", "Mode 8"]
+	if "-total-compare" not in bfac_file:
+		list_of_modes = ["Sum of B factors","Mode 7", "Mode 8"]
+	else:
+		list_of_modes = ["G-0K","G-1K","G-2K"]
 if len(bfacs[:,0])>=(htpg_length+dnak_length):
 	list_of_domains.extend((htpg_length+dnak_domains))
 	list_of_domain_names.extend(dnak_domain_namesA)
@@ -80,4 +83,17 @@ plt.ylabel(r'$\delta$q($\AA$)', fontsize=25, weight='bold')
 plt.tight_layout()
 plt.ylim(0, ymax+0.01)
 ax.vlines(list_of_domains, 0, ymax+0.01, colors = 'k', linestyle='--')
+if len(bfacs[:,0])==(dnak_length+grpe_length):
+	ax.plot([1, 39], [ymax+0.01, ymax+0.01], color='cyan', lw=10)
+	ax.plot([116, 188], [ymax+0.01, ymax+0.01], color='cyan', lw=10)
+	ax.text((1+39)/2, ymax+0.015, 'IA', color='cyan', fontsize=12, ha='center')
+	ax.text((116+188)/2, ymax+0.015, 'IA', color='cyan', fontsize=12, ha='center')
+	ax.plot([40, 115], [ymax+0.01, ymax+0.01], color='magenta', lw=10)
+	ax.text((40+115)/2, ymax+0.015, 'IB', color='magenta', fontsize=12, ha='center')
+	ax.plot([189, 228], [ymax+0.01, ymax+0.01], color='green', lw=10)
+	ax.plot([307, 383], [ymax+0.01, ymax+0.01], color='green', lw=10)
+	ax.text((189+228)/2, ymax+0.015, 'IIA', color='green', fontsize=12, ha='center')
+	ax.text((307+383)/2, ymax+0.015, 'IIA', color='green', fontsize=12)
+	ax.plot([229, 306], [ymax+0.01, ymax+0.01], color='purple', lw=10)
+	ax.text((229+306)/2, ymax+0.015, 'IIB', color='purple', fontsize=12, ha='center')
 plt.savefig(f"testestest{bfac_file[:-4]}-figure.svg")
